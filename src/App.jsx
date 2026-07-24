@@ -1,3 +1,5 @@
+import GameLayout from './components/layout/GameLayout';
+
 export default function App() {
-  return <h1>Initial Commit</h1>;
+  return <GameLayout />;
 }
