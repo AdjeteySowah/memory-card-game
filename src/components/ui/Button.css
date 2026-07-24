@@ -1,0 +1,17 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background-color: rgb(145, 104, 76);
+  font-weight: 700;
+  line-height: 1;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.button--text {
+  font-size: 2rem;
+}
