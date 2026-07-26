@@ -6,10 +6,13 @@ import Button from '../components/ui/Button';
 import gameLogo from '../assets/images/logo.png';
 import './HomePage.css';
 
-export default function HomePage() {
-  const [allCharacters, setAllCharacters] = useState(null);
+export default function HomePage({
+  allCharacters,
+  setAllCharacters,
+  animateIn,
+  setAnimateIn,
+}) {
   const [error, setError] = useState(null);
-  const [animateIn, setAnimateIn] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,7 +29,7 @@ export default function HomePage() {
           const data = await response.json();
           setAllCharacters(data);
         } catch (error) {
-          console.error(error);
+          console.error(error); // Do I need to console this?
           setError(error.message);
         }
       }
