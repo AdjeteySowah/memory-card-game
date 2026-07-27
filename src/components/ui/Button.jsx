@@ -2,12 +2,12 @@ import './Button.css';
 
 export default function Button({
   children,
-  className,
   icon,
   variant,
+  alt,
   ...buttonProps
 }) {
-  const classNames = ['button', variant && `button--${variant}`, className]
+  const classNames = ['button', variant && `button--${variant}`]
     .filter(Boolean)
     .join(' ');
 
@@ -15,7 +15,7 @@ export default function Button({
     <button className={classNames} type="button" {...buttonProps}>
       {icon && (
         <span className="button__icon" aria-hidden="true">
-          {icon}
+          <img src={icon} alt={alt} />
         </span>
       )}
       {children && <span>{children}</span>}
