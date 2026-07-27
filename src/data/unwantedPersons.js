@@ -1,4 +1,4 @@
-const unwantedPersons = [
+export const unwantedPersons = [
   { person: 'Josh Keaton', character: 'Salo' },
   { person: 'Erica Lindbeck', character: 'Elora' },
   { person: 'Abigail Marlowe', character: 'Mrs. Kiramann' },
@@ -31,7 +31,7 @@ const unwantedPersons = [
   { person: 'Dave B. Mitchell', character: 'Verne' },
   { person: 'Yuri Lowenthal', character: 'Thug #1' },
   { person: 'Krizia Bajos', character: 'Ximena' },
-  { person: 'Faustino Duran', character: 'Young Jace' },
+  { person: 'Faustino Duran', character: 'Young Jayce' },
   { person: 'Yuri Lowenthal', character: 'Stall Holder' },
   { person: 'Fred Tatasciore', character: 'Master Crafter' },
   { person: 'Robin Atkin Downes', character: 'Burly Henchman' },
