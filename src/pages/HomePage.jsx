@@ -23,6 +23,9 @@ export default function HomePage({
   setAllCharacters,
   animateIn,
   setAnimateIn,
+  setRenderHomePage,
+  setDifficultyLevel,
+  setRenderGamePage,
 }) {
   const [error, setError] = useState(null);
 
@@ -73,6 +76,12 @@ export default function HomePage({
     return <Loading />;
   }
 
+  function handleDifficultySelection(e) {
+    setRenderHomePage(false);
+    setDifficultyLevel(e.target.textContent);
+    setRenderGamePage(true);
+  }
+
   return (
     <main className={`home-page ${animateIn ? 'active' : ''}`}>
       <img
@@ -84,9 +93,15 @@ export default function HomePage({
       <h1 className="home-page__title">Memory Game</h1>
 
       <div className="home-page__difficulty-buttons">
-        <Button variant="text">Easy</Button>
-        <Button variant="text">Medium</Button>
-        <Button variant="text">Hard</Button>
+        <Button variant="primary" onClick={handleDifficultySelection}>
+          Easy
+        </Button>
+        <Button variant="primary" onClick={handleDifficultySelection}>
+          Medium
+        </Button>
+        <Button variant="primary" onClick={handleDifficultySelection}>
+          Hard
+        </Button>
       </div>
     </main>
   );
