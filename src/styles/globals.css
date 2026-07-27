@@ -33,6 +33,10 @@
   color: white;
   position: fixed;
   bottom: 2rem;
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
   transform: translateY(100rem);
   opacity: 0.5;
   transition:
@@ -43,4 +47,9 @@
 .footer.active {
   transform: translateY(0);
   opacity: 1;
+}
+
+.footer div {
+  display: flex;
+  gap: 2rem;
 }
