@@ -4,7 +4,19 @@ import Loading from '../components/ui/Loading';
 import Button from '../components/ui/Button';
 
 import gameLogo from '../assets/images/logo.png';
+import { unwantedPersons } from '../data/unwantedPersons';
 import './HomePage.css';
+
+function filterData(data) {
+  const filteredData = data.filter(
+    (item) =>
+      !unwantedPersons.some(
+        (p) =>
+          p.person === item.person.name && p.character === item.character.name
+      )
+  );
+  return filteredData;
+}
 
 export default function HomePage({
   allCharacters,
@@ -27,7 +39,7 @@ export default function HomePage({
           }
 
           const data = await response.json();
-          setAllCharacters(data);
+          setAllCharacters(filterData(data));
         } catch (error) {
           console.error(error); // Do I need to console this?
           setError(error.message);
