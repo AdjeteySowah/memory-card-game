@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import HomePage from '../../pages/HomePage';
 import GamePage from '../../pages/GamePage';
 import Button from '../ui/Button';
 
+import { unwantedPersons } from '../../data/unwantedPersons';
 import backgroundVideo from '../../assets/background-video.mp4';
 import volume from '../../assets/icons/volume.svg';
 import volumeOff from '../../assets/icons/volume-off.svg';
@@ -12,15 +13,59 @@ import musicOff from '../../assets/icons/music-off.svg';
 import questionMark from '../../assets/icons/question-mark.svg';
 import cancel from '../../assets/icons/cancel.svg';
 
+function filterData(data) {
+  const filteredData = data.filter(
+    (item) =>
+      !unwantedPersons.some(
+        (p) =>
+          p.person === item.person.name && p.character === item.character.name
+      )
+  );
+  return filteredData;
+}
+
 export default function GameLayout() {
-  const [allCharacters, setAllCharacters] = useState(null);
+  const [characters, setCharacters] = useState(null);
   const [animateIn, setAnimateIn] = useState(false);
+  const [error, setError] = useState(null);
   const [renderHomePage, setRenderHomePage] = useState(true);
   const [renderGamePage, setRenderGamePage] = useState(false);
-  const [difficultyLevel, setDifficultyLevel] = useState(null);
+  const [difficulty, setDifficulty] = useState(null);
   const [soundOn, setSoundOn] = useState(true);
   const [musicOn, setMusicOn] = useState(true);
   const [helpOn, setHelpOn] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      async function fetchCharacters() {
+        try {
+          const response = await fetch(
+            'https://api.tvmaze.com/shows/55138/cast'
+          );
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch characters.');
+          }
+
+          const data = await response.json();
+          setCharacters(filterData(data));
+        } catch (error) {
+          console.error(error); // Do I need to console this?
+          setError(error.message);
+        }
+      }
+
+      fetchCharacters();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (characters) {
+      requestAnimationFrame(() => setAnimateIn(true));
+    }
+  }, [renderHomePage, renderGamePage, characters]);
 
   function handleSoundToggle() {
     setSoundOn((prevValue) => !prevValue);
@@ -45,19 +90,28 @@ export default function GameLayout() {
 
       {renderHomePage && (
         <HomePage
-          allCharacters={allCharacters}
-          setAllCharacters={setAllCharacters}
+          characters={characters}
           animateIn={animateIn}
           setAnimateIn={setAnimateIn}
+          error={error}
           setRenderHomePage={setRenderHomePage}
-          setDifficultyLevel={setDifficultyLevel}
+          setDifficulty={setDifficulty}
           setRenderGamePage={setRenderGamePage}
         />
       )}
 
-      {renderGamePage && <GamePage difficultyLevel={difficultyLevel} />}
+      {renderGamePage && (
+        <GamePage
+          characters={characters}
+          animateIn={animateIn}
+          difficulty={difficulty}
+          setAnimateIn={setAnimateIn}
+          setRenderHomePage={setRenderHomePage}
+          setRenderGamePage={setRenderGamePage}
+        />
+      )}
 
-      {allCharacters && (
+      {characters && (
         <footer className={`footer ${animateIn ? 'active' : ''}`}>
           <div>
             <Button
