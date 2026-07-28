@@ -1,0 +1,29 @@
+.score-board {
+  background-color: rgb(145, 104, 76);
+  padding: 2rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+
+.score-board.active {
+  opacity: 1;
+}
+
+.score {
+  padding-bottom: 0.5rem;
+}
+
+.score,
+.best-score {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .score span,
+.best-score span {
+  display: block;
+  text-align: right;
+} */
