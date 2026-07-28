@@ -1,0 +1,21 @@
+.card {
+  padding: 1rem;
+  background-color: rgb(105, 60, 4);
+  border-radius: 2rem;
+  max-width: 21rem;
+  place-self: center;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card-image {
+  border-radius: 2rem;
+}
+
+.card-character-name {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+}
