@@ -22,7 +22,7 @@ export default function HomePage({
 
   if (error) {
     return (
-      <main>
+      <main className="home-page home-page--error">
         <div className="home-page__error">
           <h2>Something went wrong</h2>
           <p>{error}</p>

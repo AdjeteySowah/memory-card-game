@@ -12,9 +12,14 @@
     opacity 0.5s ease;
 }
 
-.home-page.active {
+.home-page.active,
+.home-page--error {
   transform: scale(1);
   opacity: 1;
+}
+
+.home-page--error {
+  transition: none;
 }
 
 .home-page__logo {
