@@ -31,7 +31,6 @@ export default function GamePage({
       </div>
 
       <div className={`game-board ${animateIn ? 'active' : ''}`}>
-        <div className="game-progress-counter">0 / 6</div>
         <CardCollection characters={characters} difficulty={difficulty} />
       </div>
     </main>
