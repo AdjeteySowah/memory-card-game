@@ -1,6 +1,6 @@
 .game-page {
   min-height: 100vh;
-  color: rgb(255, 255, 255); /* Every component should decide, remove later */
+  color: rgb(255, 255, 255);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,8 +24,13 @@
   opacity: 1;
 }
 
+.game-page .game-logo {
+  transition: transform 0.5s ease;
+}
+
 .game-page .game-logo:hover {
   cursor: pointer;
+  transform: scale(1.1);
 }
 
 .game-board {
