@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import Card from './Card';
 import './CardCollection.css';
 
@@ -12,7 +13,7 @@ function shuffle(characters) {
   return shuffled;
 }
 
-export default function CardCollection({ characters, difficulty }) {
+function updateCharacterCardContent(characters, difficulty) {
   const characterCards =
     difficulty === 'Easy'
       ? shuffle(characters).slice(0, 4)
@@ -20,14 +21,39 @@ export default function CardCollection({ characters, difficulty }) {
         ? shuffle(characters).slice(0, 8)
         : shuffle(characters).slice(0, 12);
 
+  return characterCards;
+}
+
+export default function CardCollection({ characters, difficulty }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [characterCards, setCharacterCards] = useState(() =>
+    updateCharacterCardContent(characters, difficulty)
+  );
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  function handleFlip() {
+    if (isFlipped) return;
+
+    setIsFlipped(true);
+    timeoutRef.current = setTimeout(() => {
+      setCharacterCards(updateCharacterCardContent(characters, difficulty));
+      setIsFlipped(false);
+    }, 1200);
+  }
+
   return (
-    <div className="card-collection">
-      {characterCards.map((char) => (
+    <div className="card-collection" onClick={handleFlip}>
+      {characterCards.map((char, index) => (
         <Card
-          key={char.character.id}
+          key={index}
           src={char.character.image.medium}
           alt={char.character.name}
           characterName={char.character.name}
+          isFlipped={isFlipped}
         />
       ))}
     </div>
