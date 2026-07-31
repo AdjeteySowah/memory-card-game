@@ -1,16 +1,51 @@
-.card {
-  padding: 1rem;
-  background-color: rgb(105, 60, 4);
-  border-radius: 2rem;
-  max-width: 21rem;
-  place-self: center;
+.card-tilt {
+  display: inline-block;
 }
 
-.card:hover {
+.card {
+  perspective: 1000px;
   cursor: pointer;
 }
 
+.card-inner {
+  position: relative;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  pointer-events: none;
+  cursor: default;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  border-radius: 2rem;
+  background-color: rgb(0, 0, 0);
+  background-image: url(../../assets/images/card-bg-image.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.card-front {
+  padding: 1rem;
+  position: relative;
+}
+
+.card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
 .card-image {
+  display: block;
+  max-width: 100%;
   border-radius: 2rem;
 }
 
@@ -18,4 +53,5 @@
   display: block;
   margin-top: 0.5rem;
   text-align: center;
+  color: rgb(255, 255, 255);
 }
