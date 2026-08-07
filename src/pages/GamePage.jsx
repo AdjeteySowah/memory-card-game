@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import CardCollection from '../components/game/CardCollection';
 import ScoreBoard from '../components/game/ScoreBoard';
 
@@ -12,6 +14,8 @@ export default function GamePage({
   setRenderHomePage,
   setRenderGamePage,
 }) {
+  const [progress, setProgress] = useState(0);
+
   function handleLogoClick() {
     setAnimateIn(false);
     setRenderGamePage(false);
@@ -27,11 +31,20 @@ export default function GamePage({
           alt="Game logo: Arcane League of Legends"
           onClick={handleLogoClick}
         />
-        <ScoreBoard animateIn={animateIn} />
+        <ScoreBoard
+          animateIn={animateIn}
+          difficulty={difficulty}
+          progress={progress}
+        />
       </div>
 
       <div className={`game-board ${animateIn ? 'active' : ''}`}>
-        <CardCollection characters={characters} difficulty={difficulty} />
+        <CardCollection
+          characters={characters}
+          difficulty={difficulty}
+          progress={progress}
+          setProgress={setProgress}
+        />
       </div>
     </main>
   );
