@@ -1,0 +1,65 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 2rem;
+  max-width: 80rem;
+  width: 90%;
+  aspect-ratio: 16 / 9;
+  padding: 3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition: opacity 2s ease;
+}
+
+.modal-box.active {
+  opacity: 1;
+}
+
+.modal-box.modal-box__won {
+  background-color: black;
+  background-image: url(../assets/images/modal-win.jpg);
+}
+
+.modal-box.modal-box__lost {
+  background-color: black;
+  background-image: url(../assets/images/modal-lose.jpg);
+}
+
+.modal-box .result {
+  letter-spacing: 0.25rem;
+  font-weight: 700;
+  font-size: 3rem;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+}
+
+.modal-box__lost .result {
+  background-color: rgb(179, 0, 0);
+}
+
+.modal-box__won .result {
+  background-color: rgb(175, 50, 0);
+}
+
+.modal-box button {
+  background-color: rgb(255, 255, 255);
+  border-radius: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  letter-spacing: 0.25rem;
+}

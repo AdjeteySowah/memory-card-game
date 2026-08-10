@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import CardCollection from '../components/game/CardCollection';
 import ScoreBoard from '../components/game/ScoreBoard';
+import Modal from './ModalBox';
 
 import gameLogo from '../assets/images/logo.png';
 import './GamePage.css';
@@ -15,6 +16,10 @@ export default function GamePage({
   setRenderGamePage,
 }) {
   const [progress, setProgress] = useState(0);
+  const [gameWon, setGameWon] = useState(false);
+  const [gameLost, setGameLost] = useState(false);
+  const totalProgress =
+    difficulty === 'Easy' ? 5 : difficulty === 'Medium' ? 8 : 12;
 
   function handleLogoClick() {
     setAnimateIn(false);
@@ -35,6 +40,7 @@ export default function GamePage({
           animateIn={animateIn}
           difficulty={difficulty}
           progress={progress}
+          totalProgress={totalProgress}
         />
       </div>
 
@@ -43,9 +49,26 @@ export default function GamePage({
           characters={characters}
           difficulty={difficulty}
           progress={progress}
+          totalProgress={totalProgress}
           setProgress={setProgress}
+          setGameWon={setGameWon}
+          setGameLost={setGameLost}
         />
       </div>
+
+      {gameWon ? (
+        <Modal
+          gameResult={'You win!'}
+          gameWon={gameWon}
+          animateIn={animateIn}
+        />
+      ) : gameLost ? (
+        <Modal
+          gameResult={'You lose!'}
+          gameWon={gameWon}
+          animateIn={animateIn}
+        />
+      ) : null}
     </main>
   );
 }
