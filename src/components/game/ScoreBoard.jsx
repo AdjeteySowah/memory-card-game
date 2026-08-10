@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import './ScoreBoard.css';
 
-export default function ScoreBoard({ animateIn, difficulty, progress }) {
-  const [bestScore, setBestScore] = useState(0);
-  const totalProgress =
-    difficulty === 'Easy' ? 5 : difficulty === 'Medium' ? 8 : 12;
+export default function ScoreBoard({ animateIn, progress, totalProgress }) {
+  let bestScore = 0;
 
   return (
     <section className={`score-board-container ${animateIn ? 'active' : ''}`}>
