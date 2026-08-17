@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Button from '../ui/Button';
+import { playSound, toggleSoundEffects, toggleMusic } from '../../utils/sounds';
 
 import volume from '../../assets/icons/volume.svg';
 import volumeOff from '../../assets/icons/volume-off.svg';
@@ -11,19 +12,32 @@ import cancel from '../../assets/icons/cancel.svg';
 
 export default function Footer({ animateIn }) {
   const [soundOn, setSoundOn] = useState(true);
-  const [musicOn, setMusicOn] = useState(true);
+  const [musicOn, setMusicOn] = useState(false);
   const [helpOn, setHelpOn] = useState(false);
 
   function handleSoundClick() {
+    if (soundOn) playSound('click');
     setSoundOn((prevValue) => !prevValue);
+    toggleSoundEffects();
   }
 
   function handleMusicClick() {
+    playSound('click');
     setMusicOn((prevValue) => !prevValue);
+    toggleMusic();
   }
 
-  function handleHelpClick() {
+  function handleHelpClick(e) {
+    const root = e.target.closest('#root');
+    const instructions = root.querySelector('.instructions');
+
+    if (helpOn) {
+      instructions.classList.remove('active');
+    } else {
+      instructions.classList.add('active');
+    }
     setHelpOn((prevValue) => !prevValue);
+    playSound('click');
   }
 
   return (

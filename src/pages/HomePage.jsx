@@ -1,6 +1,8 @@
 import Loading from '../components/ui/Loading';
 import Button from '../components/ui/Button';
 
+import { playSound } from '../utils/sounds';
+
 import gameLogo from '../assets/images/logo.png';
 import './HomePage.css';
 
@@ -14,6 +16,7 @@ export default function HomePage({
   setRenderGamePage,
 }) {
   function handleDifficultySelection(e) {
+    playSound('click');
     setRenderHomePage(false);
     setAnimateIn(false);
     setDifficulty(e.target.textContent);

@@ -1,0 +1,28 @@
+.instructions {
+  position: fixed;
+  right: 6rem;
+  bottom: 8rem;
+  background-color: rgb(145, 104, 76);
+  color: rgb(255, 255, 255);
+  padding: 2rem;
+  line-height: 3rem;
+  border-radius: 2rem 2rem 0 2rem;
+  transform: translateX(1000rem);
+  transition: transform 0.5s ease;
+}
+
+.instructions.active {
+  transform: translateX(0);
+}
+
+.instructions p:nth-child(2) span {
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .instructions {
+    right: 1rem;
+    margin-left: 1rem;
+    border-bottom-right-radius: 2rem;
+  }
+}
