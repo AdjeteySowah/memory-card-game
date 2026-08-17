@@ -2,7 +2,10 @@ import { useState } from 'react';
 
 import CardCollection from '../components/game/CardCollection';
 import ScoreBoard from '../components/game/ScoreBoard';
-import Modal from './ModalBox';
+import ModalBox from './ModalBox';
+
+import { updateCharacterCardContent } from '../utils/cardGameLogic';
+import { playSound } from '../utils/sounds';
 
 import gameLogo from '../assets/images/logo.png';
 import './GamePage.css';
@@ -11,17 +14,29 @@ export default function GamePage({
   characters,
   animateIn,
   difficulty,
+  showModal,
   setAnimateIn,
   setRenderHomePage,
   setRenderGamePage,
+  setShowModal,
 }) {
+  const [selectedCharacterCards, setSelectedCharacterCards] = useState([]);
   const [progress, setProgress] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+  const [characterCards, setCharacterCards] = useState(() =>
+    updateCharacterCardContent(
+      characters,
+      difficulty,
+      selectedCharacterCards,
+      progress
+    )
+  );
   const [gameWon, setGameWon] = useState(false);
-  const [gameLost, setGameLost] = useState(false);
   const totalProgress =
     difficulty === 'Easy' ? 5 : difficulty === 'Medium' ? 8 : 12;
 
   function handleLogoClick() {
+    playSound('click');
     setAnimateIn(false);
     setRenderGamePage(false);
     setRenderHomePage(true);
@@ -41,34 +56,43 @@ export default function GamePage({
           difficulty={difficulty}
           progress={progress}
           totalProgress={totalProgress}
+          bestScore={bestScore}
         />
       </div>
 
       <div className={`game-board ${animateIn ? 'active' : ''}`}>
         <CardCollection
           characters={characters}
+          characterCards={characterCards}
+          selectedCharacterCards={selectedCharacterCards}
           difficulty={difficulty}
           progress={progress}
+          bestScore={bestScore}
           totalProgress={totalProgress}
+          setCharacterCards={setCharacterCards}
+          setSelectedCharacterCards={setSelectedCharacterCards}
           setProgress={setProgress}
+          setBestScore={setBestScore}
           setGameWon={setGameWon}
-          setGameLost={setGameLost}
+          setAnimateIn={setAnimateIn}
+          setShowModal={setShowModal}
         />
       </div>
 
-      {gameWon ? (
-        <Modal
-          gameResult={'You win!'}
+      {showModal && (
+        <ModalBox
+          characters={characters}
+          difficulty={difficulty}
+          gameResult={`${gameWon ? 'You win!' : 'You lose!'}`}
           gameWon={gameWon}
           animateIn={animateIn}
+          setCharacterCards={setCharacterCards}
+          setSelectedCharacterCards={setSelectedCharacterCards}
+          setProgress={setProgress}
+          setGameWon={setGameWon}
+          setShowModal={setShowModal}
         />
-      ) : gameLost ? (
-        <Modal
-          gameResult={'You lose!'}
-          gameWon={gameWon}
-          animateIn={animateIn}
-        />
-      ) : null}
+      )}
     </main>
   );
 }

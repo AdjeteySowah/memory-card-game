@@ -11,10 +11,12 @@ export default function GameLayout() {
   const {
     renderHomePage,
     renderGamePage,
+    showModal,
     difficulty,
     animateIn,
     setRenderHomePage,
     setRenderGamePage,
+    setShowModal,
     setDifficulty,
     setAnimateIn,
   } = useGameNavigation(characters);
@@ -40,9 +42,11 @@ export default function GameLayout() {
           characters={characters}
           animateIn={animateIn}
           difficulty={difficulty}
+          showModal={showModal}
           setAnimateIn={setAnimateIn}
           setRenderHomePage={setRenderHomePage}
           setRenderGamePage={setRenderGamePage}
+          setShowModal={setShowModal}
         />
       )}
 

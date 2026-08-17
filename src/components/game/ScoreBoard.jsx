@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import './ScoreBoard.css';
 
-export default function ScoreBoard({ animateIn, progress, totalProgress }) {
-  let bestScore = 0;
-
+export default function ScoreBoard({
+  animateIn,
+  progress,
+  totalProgress,
+  bestScore,
+}) {
   return (
     <section className={`score-board-container ${animateIn ? 'active' : ''}`}>
       <div className="score-board">
@@ -12,8 +15,7 @@ export default function ScoreBoard({ animateIn, progress, totalProgress }) {
         </span>
 
         <span className="best-score">
-          <span>Best Score:</span>{' '}
-          <span>{progress > bestScore ? progress : bestScore}</span>
+          <span>Best Score:</span> <span>{bestScore}</span>
         </span>
       </div>
 
