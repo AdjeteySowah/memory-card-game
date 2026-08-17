@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './ScoreBoard.css';
 
 export default function ScoreBoard({
