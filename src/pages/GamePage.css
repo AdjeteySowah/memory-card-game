@@ -52,3 +52,11 @@
   transform: scale(1);
   opacity: 1;
 }
+
+@media (max-width: 850px) {
+  .game-header {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+}

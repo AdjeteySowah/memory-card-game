@@ -55,3 +55,12 @@
   text-align: center;
   color: rgb(255, 255, 255);
 }
+
+@media (max-width: 600px) {
+  .card-character-name {
+    font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -2,6 +2,7 @@
 
 #root {
   position: relative;
+  /* min-width: 30rem; */
 }
 
 .video-container {
@@ -48,4 +49,17 @@
 .footer div {
   display: flex;
   gap: 2rem;
+}
+
+@media (max-width: 1240px) {
+  .footer {
+    background-color: rgb(145, 104, 76);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: -2rem;
+  }
+
+  .footer button {
+    background-color: rgb(233, 172, 131);
+  }
 }

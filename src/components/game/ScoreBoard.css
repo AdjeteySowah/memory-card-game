@@ -43,3 +43,17 @@
 .score-board-progress-counter {
   font-weight: 700;
 }
+
+@media (max-width: 1350px) {
+  .score-board-container {
+    position: static;
+    flex-direction: row-reverse;
+  }
+}
+
+@media (max-width: 850px) {
+  .score-board-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
