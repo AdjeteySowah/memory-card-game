@@ -48,7 +48,7 @@
 }
 
 .home-page__error h2 {
-  color: rgb(179, 0, 0);
+  color: rgb(180, 0, 0);
   margin-bottom: 0.5rem;
   font-size: 3rem;
 }
@@ -56,4 +56,18 @@
 .home-page__error p {
   color: rgb(51, 51, 51);
   font-size: 2rem;
+}
+
+.home-page--error ul {
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .home-page--error h2 {
+    font-size: 1.8rem;
+  }
+
+  .home-page--error p {
+    font-size: 1.6rem;
+  }
 }
